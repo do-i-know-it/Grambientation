@@ -8,7 +8,7 @@ const outputPath = path.join(rootPath, "build");
 module.exports =
 {
     mode: "development",
-    entry: path.join(inputPath, "scripts", "index.ts"),
+    entry: path.join(inputPath, "scripts", "index.tsx"),
     output:
     {
         path: path.join(outputPath, "scripts"),
@@ -19,7 +19,7 @@ module.exports =
         rules:
         [
             {
-                test: /\.ts?$/,
+                test: /\.tsx?$/,
                 loader: "ts-loader",
             }
         ]
@@ -29,7 +29,9 @@ module.exports =
         extensions:
         [
           ".ts",
+          ".tsx",
           ".js",
+          ".jsx",
         ],
     },
     plugins:
