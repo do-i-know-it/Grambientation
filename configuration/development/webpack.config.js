@@ -1,7 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const rootPath = path.join(__dirname, "./");
+const rootPath = path.join(__dirname, "../../");
+const configurationPath = path.join(rootPath, "configuration");
 const inputPath = path.join(rootPath, "assets");
 const outputPath = path.join(rootPath, "build");
 
@@ -21,17 +22,21 @@ module.exports =
             {
                 test: /\.tsx?$/,
                 loader: "ts-loader",
-            }
+                options:
+                {
+                    configFile: path.join(configurationPath, "development", "tsconfig.json"),
+                },
+            },
         ]
     },
     resolve:
     {
         extensions:
         [
-          ".ts",
-          ".tsx",
-          ".js",
-          ".jsx",
+            ".ts",
+            ".tsx",
+            ".js",
+            ".jsx",
         ],
     },
     plugins:
@@ -41,7 +46,7 @@ module.exports =
             {
                 filename: "index.html",
                 template: path.join(inputPath, "scripts", "index.html"),
-            }
+            },
         )
     ],
     devtool: "inline-source-map",

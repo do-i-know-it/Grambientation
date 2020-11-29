@@ -2,15 +2,15 @@
   "compilerOptions":
   {
     "target": "es5",
-    "module": "commonjs",
-    "sourceMap": true,
+    "module": "es2015",
     "strict": true,
     "esModuleInterop": true,
     "jsx": "react",
     "moduleResolution": "node",
+    "sourceMap": false,
   },
   "include":
   [
-    "./assets/scripts/**/*"
+    "../../assets/scripts/**/*"
   ],
 }

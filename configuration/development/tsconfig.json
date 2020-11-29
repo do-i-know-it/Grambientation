@@ -1,0 +1,16 @@
+{
+  "compilerOptions":
+  {
+    "target": "es5",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "sourceMap": true,
+  },
+  "include":
+  [
+    "../../assets/scripts/**/*"
+  ],
+}
