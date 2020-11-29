@@ -8,11 +8,29 @@ const outputPath = path.join(rootPath, "build");
 module.exports =
 {
     mode: "development",
-    entry: path.join(inputPath, "scripts", "index.js"),
+    entry: path.join(inputPath, "scripts", "index.ts"),
     output:
     {
         path: path.join(outputPath, "scripts"),
         filename: "index.js",
+    },
+    module:
+    {
+        rules:
+        [
+            {
+                test: /\.ts?$/,
+                loader: "ts-loader",
+            }
+        ]
+    },
+    resolve:
+    {
+        extensions:
+        [
+          ".ts",
+          ".js",
+        ],
     },
     plugins:
     [
