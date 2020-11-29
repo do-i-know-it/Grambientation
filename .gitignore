@@ -42,3 +42,6 @@ $RECYCLE.BIN/
 
 # Node.js
 node_modules
+
+# workspace to build
+build
