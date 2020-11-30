@@ -2,7 +2,9 @@ import React, { useRef, useState, FunctionComponent } from "react";
 import { IconButton, Tooltip, Typography } from "@material-ui/core";
 import { GetApp } from "@material-ui/icons";
 import { IGradientDirection } from "./IGradientDirection";
+import { IGradientConfiguration } from "./IGradientConfiguration";
 import { GradientCanvas } from "./GradientCanvas";
+import { GradientPalette } from "./GradientPalette";
 
 const Main : FunctionComponent = () =>
 {
@@ -25,6 +27,23 @@ const Main : FunctionComponent = () =>
         },
     };
     const [direction, setDirection] = useState<IGradientDirection>(initialDirection);
+
+    const initialConfigurationList =
+    [
+        {
+            red: 0,
+            green: 0,
+            blue: 0,
+            offset: 0,
+        },
+        {
+            red: 255,
+            green: 255,
+            blue: 255,
+            offset: 1,
+        },
+    ];
+    const [configurationList, setConfigurationList] = useState<IGradientConfiguration[]>(initialConfigurationList);
 
     const canvas = useRef<HTMLCanvasElement>(null);
     const onClick = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
@@ -63,6 +82,7 @@ const Main : FunctionComponent = () =>
                 <GradientCanvas direction={direction} onUpdated={setDirection}/>
             </main>
             <footer style ={{ width: `${footerWidth}px`, height: `${footerHeight}px`, position: "relative", }}>
+                <GradientPalette size={footerHeight / 2} configurationList={configurationList} onUpdated={setConfigurationList}/>
                 <Tooltip arrow={true} title="Download image" style={{ position: "absolute", bottom: "0px", right: "0px", }}>
                     <IconButton aria-label="download image" onClick={onClick}>
                         <GetApp/>
