@@ -1,4 +1,4 @@
-import React, { useRef, useState, FunctionComponent } from "react";
+import React, { useRef, useState, useEffect, FunctionComponent } from "react";
 import { IconButton, Tooltip, Typography } from "@material-ui/core";
 import { GetApp } from "@material-ui/icons";
 import { IGradientDirection } from "./IGradientDirection";
@@ -46,6 +46,32 @@ const Main : FunctionComponent = () =>
     const [configurationList, setConfigurationList] = useState<IGradientConfiguration[]>(initialConfigurationList);
 
     const canvas = useRef<HTMLCanvasElement>(null);
+    useEffect(() =>
+    {
+        if (canvas.current === null)
+        {
+            return;
+        }
+
+        const context = canvas.current.getContext("2d");
+        if (context === null)
+        {
+            return;
+        }
+
+        const gradient = context.createLinearGradient(direction.start.x, direction.start.y, direction.end.x, direction.end.y);
+
+        configurationList.forEach(configuration =>
+            {
+                gradient.addColorStop(configuration.offset, `rgb(${configuration.red}, ${configuration.green}, ${configuration.blue})`);
+            });
+        
+        context.fillStyle = gradient;
+        
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+        context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+
+    }, [direction, configurationList]);
     const onClick = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
     {
         if (canvas.current === null)
